@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          测试文章 - OrangeLewis的Blog
+          常用linux指令及linux下日志处理 - OrangeLewis的Blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/article/ruozedata的副本/">
+    <link rel="canonical" href="http://yoursite.com/article/11-11/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,14 +88,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#ruozedata" title="ruozedata">ruozedata</a>
+                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
                             
                         </div>
-                        <h1>测试文章</h1>
-                        <h2 class="subheading">This is hexo theme Demo.</h2>
+                        <h1>常用linux指令及linux下日志处理</h1>
+                        <h2 class="subheading">linux第一期</h2>
                         <span class="meta">
                             Posted by OrangeLewis on
-                            2015-07-11
+                            2017-11-11
                         </span>
                     </div>
                 
@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -212,9 +212,101 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="测试文章">测试文章</h3>
-<hr>
-<h5 id=""></h5>
+                <h1 id="linux指令">linux指令</h1>
+<h2 id="cd">cd</h2>
+<p>cd = Change Directory 切换目录</p>
+<p>用例 cd /home</p>
+<p>cd …/ 回退上一层目录</p>
+<p>cd …/…/ 回退上2层目录</p>
+<h2 id="pwd">pwd</h2>
+<p>pwd = Print Working Directory 打印当前路径</p>
+<h2 id="clear">clear</h2>
+<p>清空屏幕</p>
+<h2 id="ls">ls</h2>
+<p>ls = list ls查看当前光标所在的目录 文件有哪些</p>
+<p>ll =ls -l 罗列出当前文件或目录的详细信息</p>
+<p>-a = --all 查看隐藏文件</p>
+<p>-h = --human-readable 文件的大小</p>
+<p>-r = --reverse 反转</p>
+<p>-t 按时间排序</p>
+<p>-rt 按时间倒序</p>
+<p>ll --help 查看命令帮助</p>
+<p>（一个-代表短文本 --代表长文本）</p>
+<h2 id="mkdir">mkdir</h2>
+<p>mkdir = make directory</p>
+<p>-p = --parents 级联创建</p>
+<h2 id="mv-cp">mv / cp</h2>
+<p>mv = move</p>
+<p>cp = copy</p>
+<p>mv移动 始终只有1份 cp拷贝 原文件不动，新增一份</p>
+<p>mv ruoze.log 1/ruoze.log20191110 移动+修改名称</p>
+<h2 id="创建空文件">创建空文件</h2>
+<p>1.touch rz.log 创建一个空文件</p>
+<p>2.echo “” &gt; rz.log1 慎用，会出现一个空字符在文件</p>
+<p>3.cat /dev/null &gt; ruoze.log20191113 把一个文件设置为空</p>
+<h2 id="cat">cat</h2>
+<p>cat = Concatenate</p>
+<p>文件内容一下子全部显示</p>
+<h2 id="more">more</h2>
+<p>文件内容一页一页的往下翻，按空格键往下，回退不了，按q退出</p>
+<h2 id="less">less</h2>
+<p>文件内容 往下 往上 按上下箭头的按键 按q键退出</p>
+<h2 id="tail">tail</h2>
+<p>tail 命令可用于查看文件的内容</p>
+<p>-f = --follow 根据文件描述符进行追踪，当文件改名或被删除，追踪停止</p>
+<p>tail -300f messages 实时查看倒数300行文件</p>
+<p>-F = -f --retry 根据文件名进行追踪，并保持重试，即该文件被删除或改名后，如果再次创建相同的文件名，会继续追踪</p>
+<h2 id="">|</h2>
+<p>“|” 管道符用法</p>
+<p>上一条命令的输出，作为下一条命令参数</p>
+<p>方式：command1 | command2</p>
+<p>Linux 所提供的管道符 “|” 将两个命令隔开，管道符左边命令的输出就会作为管道符右边命令的输入。连续使用管道意味着第一个命令的输出会作为 第二个命令的输入，第二个命令的输出又会作为第三个命令的输入，依此类推</p>
+<h2 id="gt-和-gtgt">&gt; 和 &gt;&gt;</h2>
+<blockquote>
+<p>: 会重写文件，如果文件里面有内容会覆盖。</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>这个是将输出内容追加到目标文件中。如果文件不存在，就创建文件。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>：追加文件，也就是如果文件里面有内容会把新内容追加到文件尾。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>是定向输出到文件，如果文件不存在，就创建文件；如果文件存在，就将其清空。一般我们备份清理日志文件的时候，就是这种方法：先备份日志，再用 &gt;，将日志文件清空（文件大小变成 0 字节）。</p>
+</blockquote>
+<h1 id="处理日志">处理日志</h1>
+<h2 id="配置文件">配置文件</h2>
+<p>配置文件 内容较少 可以直接使用cat more less</p>
+<h2 id="log日志">log日志</h2>
+<p>内容较多</p>
+<p>实时查看</p>
+<p>tail -f xxx.log</p>
+<p>tail -F xxx.log -f+ retry</p>
+<p>flume exec source 切记使用 -F</p>
+<p>xx.log log4j代码项目 配置输出的日志</p>
+<p>规则: xxx.log 保留10份 100M</p>
+<p>aaa–&gt;xxx.log 99m</p>
+<p>xxx.log 100m</p>
+<p>mv xxx.log xxx.log1</p>
+<p>touch xxx.log 空文件</p>
+<h2 id="查看error日志">查看error日志</h2>
+<p>a.文件内容很小 几十兆，上传给window，用editplus工具打开</p>
+<p>上传下载 yum install -y lrzsz</p>
+<p>b.文件内容很大 几百兆 2G</p>
+<p>cat xxx.log | grep ERROR</p>
+<p>命令输出结果 | 命令输入的 管道符</p>
+<p>grep过滤</p>
+<h2 id="查看erro上下文">查看erro上下文</h2>
+<p>cat xxx.log | grep -A 10 ERROR 后10行</p>
+<p>cat xxx.log | grep -B 10 ERROR 前10行</p>
+<p>cat xxx.log | grep -C 30 ERROR 前后各30行 经常用 迅速定位ERROR上下文</p>
+<p>tail -300f messages 实时查看倒数300行文件</p>
+<p>tail -300F messages 不能这样写</p>
+<p>tail: option used in invalid context – 3</p>
 
                 
 
@@ -222,10 +314,10 @@
                 <!-- Pager -->
                 <ul class="pager">
                     
-                    
-                        <li class="next">
-                            <a href="/article/ruozedata/" data-toggle="tooltip" data-placement="top" title="Join ruozedata if you have a dream">Next Post &rarr;</a>
+                        <li class="previous">
+                            <a href="/article/11-13/" data-toggle="tooltip" data-placement="top" title="常用linux指令2">&larr; Previous Post</a>
                         </li>
+                    
                     
                 </ul>
 
@@ -274,7 +366,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#测试文章"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x6D4B;&#x8BD5;&#x6587;&#x7AE0;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#"><span class="toc-nav-number">1.0.1.</span> <span class="toc-nav-text"></span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#linux指令"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">linux&#x6307;&#x4EE4;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#cd"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">cd</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#pwd"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">pwd</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#clear"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">clear</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ls"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">ls</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#mkdir"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">mkdir</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#mv-cp"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">mv / cp</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#创建空文件"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">&#x521B;&#x5EFA;&#x7A7A;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#cat"><span class="toc-nav-number">1.8.</span> <span class="toc-nav-text">cat</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#more"><span class="toc-nav-number">1.9.</span> <span class="toc-nav-text">more</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#less"><span class="toc-nav-number">1.10.</span> <span class="toc-nav-text">less</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tail"><span class="toc-nav-number">1.11.</span> <span class="toc-nav-text">tail</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#"><span class="toc-nav-number">1.12.</span> <span class="toc-nav-text">|</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#gt-和-gtgt"><span class="toc-nav-number">1.13.</span> <span class="toc-nav-text">&gt; &#x548C; &gt;&gt;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#处理日志"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x5904;&#x7406;&#x65E5;&#x5FD7;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#配置文件"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#log日志"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">log&#x65E5;&#x5FD7;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看error日志"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">&#x67E5;&#x770B;error&#x65E5;&#x5FD7;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#查看erro上下文"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">&#x67E5;&#x770B;erro&#x4E0A;&#x4E0B;&#x6587;</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -294,7 +386,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#ruozedata" title="ruozedata">ruozedata</a>
+                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
                         
                     </div>
                 </section>

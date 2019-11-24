@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Join ruozedata if you have a dream - OrangeLewis的Blog
+          常用linux指令2 - OrangeLewis的Blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/article/ruozedata/">
+    <link rel="canonical" href="http://yoursite.com/article/11-13/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,14 +88,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#ruozedata" title="ruozedata">ruozedata</a>
+                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
                             
                         </div>
-                        <h1>Join ruozedata if you have a dream</h1>
-                        <h2 class="subheading">This is hexo theme Demo.</h2>
+                        <h1>常用linux指令2</h1>
+                        <h2 class="subheading">linux第二期</h2>
                         <span class="meta">
                             Posted by OrangeLewis on
-                            2015-07-11
+                            2017-11-13
                         </span>
                     </div>
                 
@@ -142,14 +142,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -212,32 +212,66 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="欢迎来到若泽数据感谢大家对我们的支持">欢迎来到若泽数据，感谢大家对我们的支持.</h3>
-<hr>
-<h4 id="join-us-if-you-have-a-dream">Join us if you have a dream.</h4>
-<ul>
-<li>
-<p>若泽数据官网<a href="http://ruozedata.com" target="_blank" rel="noopener">http://ruozedata.com</a></p>
-</li>
-<li>
-<p>腾讯课堂(直播课)，搜若泽数据 <a href="http://ruoze.ke.qq.com" target="_blank" rel="noopener">http://ruoze.ke.qq.com</a></p>
-</li>
-<li>
-<p>Bilibili网站(视频),搜若泽数据 <a href="https://space.bilibili.com/356836323" target="_blank" rel="noopener">https://space.bilibili.com/356836323</a></p>
-</li>
-<li>
-<p><a href="https://ruozedata.github.io" target="_blank" rel="noopener">若泽大数据–官方博客(当前)</a></p>
-</li>
-<li>
-<p><a href="https://github.com/ruozedata/BigData/blob/master/blog/BigDataBlogOverview.md" target="_blank" rel="noopener">若泽大数据–博客一览(早期)</a></p>
-</li>
-<li>
-<p><a href="https://github.com/ruozedata/BigData/blob/master/interview/%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98.md" target="_blank" rel="noopener">若泽大数据–内部学员面试题</a></p>
-</li>
-</ul>
-<h3 id="扫一扫学一学">扫一扫，学一学:</h3>
-<p><img src="https://github.com/Hackeruncle/BigData/blob/master/blog/pic/%E8%8B%A5%E6%B3%BD%E6%95%B0%E6%8D%AE--%E6%89%AB%E6%8F%8F%E5%85%A5%E5%8F%A3.png?raw=true" alt="image"></p>
-<h5 id="有任何疑问的qq加课程顾问-星星-1952249535-或微信ruoze_star扫码邀请进群与大佬交流">有任何疑问的，QQ加课程顾问-星星: <code>1952249535</code>、或微信(<code>ruoze_star</code>)扫码，邀请进群与大佬交流。</h5>
+                <h1 id="linux命令">linux命令</h1>
+<h2 id="echo">echo</h2>
+<p>打印，字符串或系统变量<br>
+例子：echo $PATH<br>
+显示当前 PATH 环境变量，该变量的值由一系列以冒号分隔的目录名组成。<br>
+如：/usr/java/jdk1.8.0_121/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin</p>
+<h2 id="which">which</h2>
+<p>which 指令会在环境变量 $PATH 设置的目录里查找符合条件的文件；<br>
+安装完程序或者配置完变量后，最好的习惯是使用 which 看一下，检查一下环境是否配置正确，否则可能遇到自以为正确的 bug；<br>
+命令不存在，一般是环境变量没配置正确</p>
+<h2 id="source">source</h2>
+<p>通知当前 shell 读入路径为 filename 的文件并依次执行文件中的所有语句。<br>
+source 命令是 bash shell 的内置命令。而点命令（即 “.” 命令）则是 source 的另一名称。这两个命令都以一个脚本为参数，该脚本将作为当前 shell 的环境执行，即不会启动一个新的子进程。所有在脚本中设置的变量将成为当前 Shell 的一部分。</p>
+<h2 id="rz-和-sz">rz 和 sz</h2>
+<p>sz：将选定的文件发送（send）到本地机器<br>
+rz：运行该命令会弹出一个文件选择窗口，从本地选择文件上传到 Linux 服务器</p>
+<h2 id="alias">alias</h2>
+<p>别名的使用可以简写冗长且难以记忆或者难以书写的命令<br>
+直接输入alias 查询已有别名</p>
+<h3 id="临时设置">临时设置</h3>
+<p>‘’‘<br>
+alias cp=‘cp –i’<br>
+unalias cp      取消系统的别命令<br>
+’’’</p>
+<h3 id="永久">永久</h3>
+<p>配置在环境变量中 /etc/profile ，~/.bashrc，~/.bash_profile 中，即永久配置别名</p>
+<h2 id="history">history</h2>
+<p>用于显示历史记录和执行过的指令命令。history 命令读取历史命令文件中的目录到历史命令缓冲区和将历史命令缓冲区中的目录写入命令文件。</p>
+<p>history -c 命令可以清空当前窗口的历史输出命令。</p>
+<h3 id="快速使用">快速使用</h3>
+<p>该命令单独使用时，仅显示历史命令，在命令行中，可以使用符号!执行指定序号的历史命令。例如，要执行第 2 个历史命令，则输入!2。</p>
+<h3 id="如何保存">如何保存？</h3>
+<p>history 命令：是被保存在内存中的，当退出或者登录 shell 时，会自动保存或读取。在内存中，历史命令仅能够存储 1000 条历史命令，该数量是由环境变量 HISTSIZE进行控制。默认是不显示命令的执行时间，命令的执行时间，history 已经记录，只是没有显示。</p>
+<h3 id="查询历史命令">查询历史命令</h3>
+<p>注：如想查询某个用户在系统上执行了什么命令，可以使用 root 用户身份登录系统，检查 Home 目录下的 用户主目录下的 “.bash_history” 文件，该文件记录了用户所使用的命令和历史信息。<br>
+彻底清空该文件夹的方式为：<br>
+cat /dell/null &gt; .bash_history<br>
+cat .bash_history</p>
+<h2 id="rm">rm</h2>
+<p>rm -f rz.log11  直接删除文件<br>
+rm -rf 1        直接删除文件夹</p>
+<h1 id="mac与linux互传文件">MAC与linux互传文件</h1>
+<p>文件夹比文件 多个-r<br>
+scp -r</p>
+<h1 id="mac-上传文件到-linux-服务器">mac 上传文件到 Linux 服务器</h1>
+<p>scp 文件名 用户名@服务器ip:目标路径<br>
+如：scp /Users/test/testFile <a href="mailto:test@www.linuxidc.com" target="_blank" rel="noopener">test@www.linuxidc.com</a>:/test/</p>
+<h1 id="linux-服务器下载文件到-mac">Linux 服务器下载文件到 mac</h1>
+<p>scp 用户名@服务器ip:文件路径 目标路径<br>
+如：scp <a href="mailto:test@www.linuxidc.com" target="_blank" rel="noopener">test@www.linuxidc.com</a>:/test/testFile /Users/test/</p>
+<h1 id="环境变量">环境变量</h1>
+<h2 id="个人">个人</h2>
+<p>个人环境变量配置在家目录下<br>
+~/.bash_profile<br>
+～/.bashrc 文件中<br>
+个人环境配置一些独自使用的程序变量，如果配置在用户的个人环境中，其他用户无法访问<br>
+PS:这里需要注意的是如果配置在～/.bash_profile 文件中，使用 ssh 远程连接的时候不会加载 ~/.bash_profile，造成一些无法排查的 bug</p>
+<h2 id="全局">全局</h2>
+<p>全局环境变量的配置文件是：/etc/profile<br>
+全局环境变量中一般配置的是共用的程序环境</p>
 
                 
 
@@ -246,12 +280,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/ruozedata的副本/" data-toggle="tooltip" data-placement="top" title="测试文章">&larr; Previous Post</a>
+                            <a href="/article/11-16/" data-toggle="tooltip" data-placement="top" title="常用linux指令3">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/article/hexo-theme-jepson/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme Jepson">Next Post &rarr;</a>
+                            <a href="/article/11-11/" data-toggle="tooltip" data-placement="top" title="常用linux指令及linux下日志处理">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -301,7 +335,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#欢迎来到若泽数据感谢大家对我们的支持"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x6B22;&#x8FCE;&#x6765;&#x5230;&#x82E5;&#x6CFD;&#x6570;&#x636E;&#xFF0C;&#x611F;&#x8C22;&#x5927;&#x5BB6;&#x5BF9;&#x6211;&#x4EEC;&#x7684;&#x652F;&#x6301;.</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#join-us-if-you-have-a-dream"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">Join us if you have a dream.</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#扫一扫学一学"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">&#x626B;&#x4E00;&#x626B;&#xFF0C;&#x5B66;&#x4E00;&#x5B66;:</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-5"><a class="toc-nav-link" href="#有任何疑问的qq加课程顾问-星星-1952249535-或微信ruoze_star扫码邀请进群与大佬交流"><span class="toc-nav-number">2.0.1.</span> <span class="toc-nav-text">&#x6709;&#x4EFB;&#x4F55;&#x7591;&#x95EE;&#x7684;&#xFF0C;QQ&#x52A0;&#x8BFE;&#x7A0B;&#x987E;&#x95EE;-&#x661F;&#x661F;: <code>1952249535</code>&#x3001;&#x6216;&#x5FAE;&#x4FE1;(<code>ruoze_star</code>)&#x626B;&#x7801;&#xFF0C;&#x9080;&#x8BF7;&#x8FDB;&#x7FA4;&#x4E0E;&#x5927;&#x4F6C;&#x4EA4;&#x6D41;&#x3002;</span></a></li></ol></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#linux命令"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">linux&#x547D;&#x4EE4;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#echo"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">echo</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#which"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">which</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#source"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">source</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#rz-和-sz"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">rz &#x548C; sz</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#alias"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">alias</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#临时设置"><span class="toc-nav-number">1.5.1.</span> <span class="toc-nav-text">&#x4E34;&#x65F6;&#x8BBE;&#x7F6E;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#永久"><span class="toc-nav-number">1.5.2.</span> <span class="toc-nav-text">&#x6C38;&#x4E45;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#history"><span class="toc-nav-number">1.6.</span> <span class="toc-nav-text">history</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#快速使用"><span class="toc-nav-number">1.6.1.</span> <span class="toc-nav-text">&#x5FEB;&#x901F;&#x4F7F;&#x7528;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#如何保存"><span class="toc-nav-number">1.6.2.</span> <span class="toc-nav-text">&#x5982;&#x4F55;&#x4FDD;&#x5B58;&#xFF1F;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#查询历史命令"><span class="toc-nav-number">1.6.3.</span> <span class="toc-nav-text">&#x67E5;&#x8BE2;&#x5386;&#x53F2;&#x547D;&#x4EE4;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#rm"><span class="toc-nav-number">1.7.</span> <span class="toc-nav-text">rm</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#mac与linux互传文件"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">MAC&#x4E0E;linux&#x4E92;&#x4F20;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#mac-上传文件到-linux-服务器"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">mac &#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x5230; Linux &#x670D;&#x52A1;&#x5668;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#linux-服务器下载文件到-mac"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Linux &#x670D;&#x52A1;&#x5668;&#x4E0B;&#x8F7D;&#x6587;&#x4EF6;&#x5230; mac</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#环境变量"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">&#x73AF;&#x5883;&#x53D8;&#x91CF;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#个人"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">&#x4E2A;&#x4EBA;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全局"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">&#x5168;&#x5C40;</span></a></li></ol></li></ol>
         
         </div>
       </aside>
@@ -321,7 +355,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#ruozedata" title="ruozedata">ruozedata</a>
+                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
                         
                     </div>
                 </section>
