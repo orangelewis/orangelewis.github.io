@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          linux常用命令4和vi编辑器 - OrangeLewis的Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/article/11-17/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_header.png')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                            
+                        </div>
+                        <h1>linux常用命令4和vi编辑器</h1>
+                        <h2 class="subheading">linux第四期</h2>
+                        <span class="meta">
+                            Posted by OrangeLewis on
+                            2017-11-17
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">OrangeLewis的Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="vi编辑器">vi编辑器</h1>
+<h2 id="模式切换">模式切换</h2>
+<p><img src="/img/article/11-17vi.png" alt="11-17vi"></p>
+<p>命令-&gt;编辑：i</p>
+<p>编辑-&gt;命令：esc</p>
+<p>命令-&gt;尾行： shift+：</p>
+<h2 id="尾行模式">尾行模式</h2>
+<h3 id="wq">wq</h3>
+<p>保存退出</p>
+<h3 id="wq">wq！</h3>
+<p>强制保存退出</p>
+<h3 id="q">q！</h3>
+<p>强制退出</p>
+<h3 id="">/</h3>
+<p>模糊搜索，‘/'后面为搜索内容,按回车查找，按‘N（next）'查找下一个</p>
+<h3 id="行号">行号</h3>
+<p>set nu 设置行号（number）</p>
+<p>set nonu 取消行号</p>
+<h2 id="命令行模式">命令行模式</h2>
+<h3 id="删除">删除</h3>
+<h4 id="dddelete">dd（delete）</h4>
+<p>删除当前行</p>
+<h4 id="dgglobal">dG（global）</h4>
+<p>删除当前行以下</p>
+<h4 id="ndd">ndd</h4>
+<p>删除光标以下的 n行</p>
+<h3 id="跳转">跳转</h3>
+<h4 id="gggo">gg（go）</h4>
+<p>跳转到第一行第一个字母</p>
+<h4 id="g">G</h4>
+<p>跳转到最后一个行的第一个字母</p>
+<h4 id="shift">shift+$</h4>
+<p>行尾</p>
+<h4 id="gg-dg">gg + dG</h4>
+<p>删除所有的内容</p>
+<h2 id="tips">TIPS</h2>
+<h3 id="粘贴的坑">粘贴的坑</h3>
+<p>必须在编辑模式粘贴，命令模式会造成丢失</p>
+<h1 id="linux命令">linux命令</h1>
+<h2 id="df-disk-free">df （Disk free）</h2>
+<p>df 命令用于显示目前在 Linux 系统上的文件系统的磁盘使用情况统计</p>
+<p>-h =  --human-readable 使用人类可读的格式 (预设值是不加这个选项的…)</p>
+<p><img src="/img/article/11-17-1.png" alt="11-17-1"></p>
+<h2 id="free">free</h2>
+<p>free 命令用于显示内存状态。</p>
+<p>free 指令会显示内存的使用情况，包括实体内存，虚拟的交换文件内存，共享内存区段，以及系统核心使用的缓冲区等。</p>
+<p>-m = --mega 以 MB 为单位显示内存使用情况</p>
+<p>-g = --giga 以 GB 为单位显示内存使用情况</p>
+<p>-h = --human 　以合适的单位显示内存使用情况，最大为三位数，自动计算对应的单位值</p>
+<h2 id="top">top</h2>
+<p>Linux top 命令用于实时显示负载的动态。</p>
+<p>使用权限：所有使用者。</p>
+<p><img src="/img/article/11-17top.png" alt="11-17top"></p>
+<h3 id="tips">tips</h3>
+<p>1.负载均衡的数值不能超过 10</p>
+<p>2.如果某服务长期占用 cpu 或者 men，去检查这个进程是在做什么</p>
+<p>3.如果 cpu 飙升 3000% 以上，夯住 或者有问题。代码级别的问题，如果不是自己编写的代码，大概率硬件级别 --&gt; 如果重启，重启不来，说明内存条坏了</p>
+<h2 id="psprocess-status">ps（Process Status）</h2>
+<p>ps 命令用于显示当前进程 (process) 的状态。</p>
+<p><img src="/img/article/11-17ps.png" alt="11-17ps"></p>
+<p>-ef 显示所有命令，连带命令行，常常和 grep 配合使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef|grep ssh | grep -v grep</span><br></pre></td></tr></table></figure>
+<p>查看关于ssh的进程，同时过滤掉自己</p>
+<h2 id="netstatnet-status">netstat（net status）</h2>
+<p>netstat 命令用于显示网络状态。</p>
+<p>利用 netstat 指令可让你得知整个 Linux 系统的网络情况。</p>
+<p>-n = --numeric 直接使用 IP 地址，而不通过域名服务器</p>
+<p>-l = --listening 显示监控中的服务器的 Socket。</p>
+<p>-p = --programs 显示正在使用 Socket 的程序识别码和程序名称。</p>
+<p>常用组合：查看进程得到的 pid 号查看端口号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nlp |grep &#123;对应pid&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="tips">tips</h3>
+<p>1.如果查询出来的端口号前面的 ip 是 127.0.0.1 或者 localhost，属于本地回环 ip 地址，需要修改相应的配置文件</p>
+<p>2.在 centos 部署大数据组件，发现一个错误 Connection refused 解决思路：ping ip 测试 ip-&gt;telnet ip port 测试 ip 和端口号 -&gt;防火墙</p>
+<h2 id="ifconfig">ifconfig</h2>
+<p>Linux ifconfig 命令用于显示或设置网络设备。</p>
+<p>ifconfig 可设置网络设备的状态，或是显示目前的设置</p>
+<h2 id="高危命令">高危命令</h2>
+<h3 id="rm-rf">rm -rf /</h3>
+<h3 id="vi-生产配置文件">vi 生产配置文件</h3>
+<p>先备份</p>
+<h3 id="kill-9">kill -9</h3>
+<p>要通过制定进程使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kill -9 进程pid</span><br><span class="line">kill -9 进程pid 进程pid 进程pid</span><br><span class="line">kill -9 $(pgrep -f 匹配关键词)</span><br></pre></td></tr></table></figure>
+<p>杀进程之前，先ps 找到相关的进程，搞清楚，哪些是你要杀的，不然造成生产事故</p>
+<h1 id="常用的程序管理工具">常用的程序管理工具</h1>
+<h2 id="weget">weget</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://archive.cloudera.com/cdh5/cdh/5/hadoop-2.6.0-cdh5.16.2.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="yum">yum</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum search xxx</span><br><span class="line">yum install -y xxx</span><br><span class="line">yum remove xxx</span><br></pre></td></tr></table></figure>
+<h2 id="rpm">rpm</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep http　　#查看</span><br><span class="line">rpm -e httpd-tools-2.4.6-90.el7.centos.x86_64　　#若卸载失败，有依赖文件，执行下面一行</span><br><span class="line">rpm -e  --nodeps     httpd-tools-2.4.6-90.el7.centos.x86_64　　#强制跳过依赖检查</span><br></pre></td></tr></table></figure>
+<h2 id="zip">zip</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zip -r xxx.zip ./*  　　　　#在文件夹里面压缩文件 　　　　</span><br><span class="line">zip -r test.zip test/* 　　#在文件夹外卖压缩文件夹里面的文件</span><br><span class="line">unzip test.zip</span><br></pre></td></tr></table></figure>
+<h2 id="tar">tar</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf hadoop-2.6.0-cdh5.16.2.tar.gz　　　　#解压缩.ge的tar包</span><br><span class="line">tar -czvf hadoop-2.6.0-cdh5.16.2.tar.gz  hadoop-2.6.0-cdh5.16.2/*　　#压缩.ge的tar包</span><br></pre></td></tr></table></figure>
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/11-16/" data-toggle="tooltip" data-placement="top" title="常用linux指令3">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#vi编辑器"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">vi&#x7F16;&#x8F91;&#x5668;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#模式切换"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x6A21;&#x5F0F;&#x5207;&#x6362;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#尾行模式"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x5C3E;&#x884C;&#x6A21;&#x5F0F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#wq"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">wq</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#wq"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">wq&#xFF01;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#q"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">q&#xFF01;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#"><span class="toc-nav-number">1.2.4.</span> <span class="toc-nav-text">/</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#行号"><span class="toc-nav-number">1.2.5.</span> <span class="toc-nav-text">&#x884C;&#x53F7;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#命令行模式"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">&#x547D;&#x4EE4;&#x884C;&#x6A21;&#x5F0F;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#删除"><span class="toc-nav-number">1.3.1.</span> <span class="toc-nav-text">&#x5220;&#x9664;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#dddelete"><span class="toc-nav-number">1.3.1.1.</span> <span class="toc-nav-text">dd&#xFF08;delete&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#dgglobal"><span class="toc-nav-number">1.3.1.2.</span> <span class="toc-nav-text">dG&#xFF08;global&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#ndd"><span class="toc-nav-number">1.3.1.3.</span> <span class="toc-nav-text">ndd</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#跳转"><span class="toc-nav-number">1.3.2.</span> <span class="toc-nav-text">&#x8DF3;&#x8F6C;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#gggo"><span class="toc-nav-number">1.3.2.1.</span> <span class="toc-nav-text">gg&#xFF08;go&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#g"><span class="toc-nav-number">1.3.2.2.</span> <span class="toc-nav-text">G</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#shift"><span class="toc-nav-number">1.3.2.3.</span> <span class="toc-nav-text">shift+$</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#gg-dg"><span class="toc-nav-number">1.3.2.4.</span> <span class="toc-nav-text">gg + dG</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tips"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">TIPS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#粘贴的坑"><span class="toc-nav-number">1.4.1.</span> <span class="toc-nav-text">&#x7C98;&#x8D34;&#x7684;&#x5751;</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#linux命令"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">linux&#x547D;&#x4EE4;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#df-disk-free"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">df &#xFF08;Disk free&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#free"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">free</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#top"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">top</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tips"><span class="toc-nav-number">2.3.1.</span> <span class="toc-nav-text">tips</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#psprocess-status"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">ps&#xFF08;Process Status&#xFF09;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#netstatnet-status"><span class="toc-nav-number">2.5.</span> <span class="toc-nav-text">netstat&#xFF08;net status&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#tips"><span class="toc-nav-number">2.5.1.</span> <span class="toc-nav-text">tips</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#ifconfig"><span class="toc-nav-number">2.6.</span> <span class="toc-nav-text">ifconfig</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#高危命令"><span class="toc-nav-number">2.7.</span> <span class="toc-nav-text">&#x9AD8;&#x5371;&#x547D;&#x4EE4;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#rm-rf"><span class="toc-nav-number">2.7.1.</span> <span class="toc-nav-text">rm -rf /</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#vi-生产配置文件"><span class="toc-nav-number">2.7.2.</span> <span class="toc-nav-text">vi &#x751F;&#x4EA7;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#kill-9"><span class="toc-nav-number">2.7.3.</span> <span class="toc-nav-text">kill -9</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#常用的程序管理工具"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5E38;&#x7528;&#x7684;&#x7A0B;&#x5E8F;&#x7BA1;&#x7406;&#x5DE5;&#x5177;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#weget"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">weget</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#yum"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">yum</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#rpm"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">rpm</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#zip"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">zip</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#tar"><span class="toc-nav-number">3.5.</span> <span class="toc-nav-text">tar</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'rz'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+<!-- chrome Firefox 中文锚点定位失效-->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<!-- smooth scroll behavior polyfill  -->
+<script type="text/javascript" src="/js/smoothscroll.js"></script>
+<script>
+        $('#toc').on('click','a',function(a){
+            // var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+            // console.log(window.navigator.userAgent,isChrome)
+                // if(isChrome) {
+                    // console.log(a.currentTarget.outerHTML);
+                    // console.log($(a.currentTarget).attr("href"));
+                    //跳转到指定锚点
+                    // document.getElementById(a.target.innerText.toLowerCase()).scrollIntoView(true);
+                    document.getElementById($(a.currentTarget).attr("href").replace("#","")).scrollIntoView({behavior: 'smooth' });
+                // }
+        })  
+</script>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/orangelewis">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; OrangeLewis 2019 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
