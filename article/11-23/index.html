@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          linux常用命令5 - OrangeLewis的Blog
+          MySQL 的建表规范、DDL 语句和权限操作 - OrangeLewis的Blog
         
     </title>
 
-    <link rel="canonical" href="http://yoursite.com/article/11-20/">
+    <link rel="canonical" href="http://yoursite.com/article/11-23/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -88,14 +88,14 @@
                     <div class="post-heading">
                         <div class="tags">
                             
-                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                              <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
                             
                         </div>
-                        <h1>linux常用命令5</h1>
-                        <h2 class="subheading">linux第五期</h2>
+                        <h1>MySQL 的建表规范、DDL 语句和权限操作</h1>
+                        <h2 class="subheading">mysql第二期</h2>
                         <span class="meta">
                             Posted by OrangeLewis on
-                            2017-11-20
+                            2017-11-23
                         </span>
                     </div>
                 
@@ -212,49 +212,87 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="linux">linux</h1>
-<h2 id="命令">命令</h2>
-<h3 id="crontabcron-chronos-希腊文时间">crontab（cron = Chronos 希腊文时间）</h3>
-<p>Linux crontab 是用来定期执行程序的命令。</p>
-<p>当安装完成操作系统之后，默认便会启动此任务调度命令。</p>
-<p>crond 命令每分锺会定期检查是否有要执行的工作，如果有要执行的工作便会自动执行该工作。</p>
-<p>-l         列出目前的时程表</p>
-<p>-e 		执行文字编辑器来设定时程表，内定的文字编辑器是 VI</p>
-<p>时程表的格式如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f1 f2 f3 f4 f5 program</span><br></pre></td></tr></table></figure>
-<ul>
-<li>其中 f1 是表示分钟，f2 表示小时，f3 表示一个月份中的第几日，f4 表示月份，f5 表示一个星期中的第几天。program 表示要执行的程序。</li>
-<li>当 f1 为 * 时表示每分钟都要执行 program，f2 为 * 时表示每小时都要执行程序，其馀类推</li>
-<li>当 f1 为 a-b 时表示从第 a 分钟到第 b 分钟这段时间内要执行，f2 为 a-b 时表示从第 a 到第 b 小时都要执行，其馀类推</li>
-<li>当 f1 为 */n 时表示每 n 分钟个时间间隔执行一次，f2 为 */n 表示每 n 小时个时间间隔执行一次，其馀类推</li>
-<li>当 f1 为 a, b, c,… 时表示第 a, b, c,… 分钟要执行，f2 为 a, b, c,… 时表示第 a, b, c… 个小时要执行，其馀类推</li>
-</ul>
+                <h1 id="建表规范">建表规范</h1>
 <p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">0 */2 * * * /sbin/service httpd restart  意思是每两个小时重启一次apache </span><br><span class="line"></span><br><span class="line">50 7 * * * /sbin/service sshd start  意思是每天7：50开启ssh服务 </span><br><span class="line"></span><br><span class="line">50 22 * * * /sbin/service sshd stop  意思是每天22：50关闭ssh服务 </span><br><span class="line"></span><br><span class="line">0 0 1,15 * * fsck /home  每月1号和15号检查/home 磁盘 </span><br><span class="line"></span><br><span class="line">1 * * * * /home/bruce/backup  每小时的第一分执行 /home/bruce/backup这个文件 </span><br><span class="line"></span><br><span class="line">00 03 * * 1-5 find /home &quot;*.xxx&quot; -mtime +4 -exec rm &#123;&#125; \;  每周一至周五3点钟，在目录/home中，查找文件名为*.xxx的文件，并删除4天前的文件。</span><br><span class="line"></span><br><span class="line">30 6 */10 * * ls  意思是每月的1、11、21、31日是的6：30执行一次ls命令</span><br></pre></td></tr></table></figure>
-<h4 id="面试题-每隔10s执行一次">面试题 每隔10s执行一次</h4>
-<p>自带crontab的最小粒度是分，因此不能解决秒级别的调度问题。</p>
-<p>但是换一种思路，我可以把调度代码包在循环体中，这个循环体执行 6 次，每次 sleep 10s ，加起来就是分钟，即每分钟执行 6 次，每次间隔 10 秒</p>
-<p>如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">for((i=0;i&lt;6;i++));</span><br><span class="line">do</span><br><span class="line">        date</span><br><span class="line">        sleep 10s</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p>脚本的第一行是定义解释器</p>
-<h3 id="ln-link">ln（ link）</h3>
-<p>Linux ln 命令是一个非常重要命令，它的功能是为某一个文件在另外一个位置建立一个同步的链接。</p>
-<p>当我们需要在不同的目录，用到相同的文件时，我们不需要在每一个需要的目录下都放一个必须相同的文件，我们只要在某个固定的目录，放上该文件，然后在 其它的目录下用 ln 命令链接（link）它就可以，不必重复的占用磁盘空间。</p>
-<p>ln -s = link -soft 创建一个软链接，相当于创建一个快捷方式</p>
-<h4 id="使用场景一">使用场景一</h4>
-<p>作为源文件的快捷方式存在，好处：升级源文件的时候只需要重新创建软连接，注意：环境变量中不能写源文件的路径，必须写软连接文件</p>
-<p>如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@aliyun~]# ll</span><br><span class="line">total 5</span><br><span class="line">lrwxrwxrwx 1 root root   8 Nov 21 17:23 mysql -&gt; mysql5.6</span><br><span class="line">drwxr-xr-x 2 root root   6 Nov 20 21:33 mysql5.6  #低版本部署</span><br><span class="line">drwxr-xr-x 2 root root   6 Nov 20 21:33 mysql5.7  #通过软连接来切换升级文件</span><br><span class="line">drwxr-xr-x 3 root root  44 Nov 17 23:13 ruozedata</span><br><span class="line">-rw-r--r-- 1 root root 846 Nov 17 23:12 ruozedata.zip</span><br></pre></td></tr></table></figure>
-<h4 id="使用场景二">使用场景二</h4>
-<p>作为数据盘在系统盘中日志写入目录的软连接，好处：日志写入和存储多个文件需要占用大量的磁盘，把日志的存储位置换到了数据盘中</p>
-<p>如：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir /data01/log/  #创建数据盘下的日志目录</span><br><span class="line">mv  /var/log/hbase /data01/log/　　#移动系统盘的日志文件到数据盘</span><br><span class="line">ln -s /data01/log/hbase /var/log/hbase　　#数据盘的日志文件再软连接到系统盘</span><br></pre></td></tr></table></figure>
-<h4 id="tips">tips</h4>
-<p>1.软连接文件创建后的文件和源为文件权限不同，必须注意和修改软连接文件和目标文件的权限</p>
-<p>2.在创建软连接的时候，源文件路径和目标文件路径推介使用绝对路径</p>
-<h2 id="后台执行脚本的方法">后台执行脚本的方法</h2>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./test.sh &amp;</span><br><span class="line">nohup ./test.sh &amp; #手动启动脚本 看日志 开发维护 测试</span><br><span class="line">nohup ./test.sh &gt; /root/test.log 2&gt;&amp;1 &amp; # 生产上 要规范化输出到日志</span><br></pre></td></tr></table></figure>
-<p>其中 nohup = No HangUP</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> rzdata(</span><br><span class="line"><span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="literal">null</span> auto_increment,</span><br><span class="line"></span><br><span class="line"><span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">200</span>),</span><br><span class="line">age  <span class="built_in">int</span>(<span class="number">3</span>),</span><br><span class="line"></span><br><span class="line">createuser <span class="built_in">varchar</span>(<span class="number">200</span>) ,</span><br><span class="line">createtime <span class="keyword">timestamp</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="keyword">current_timestamp</span>,</span><br><span class="line">updateuser <span class="built_in">varchar</span>(<span class="number">200</span>) ,</span><br><span class="line">updatetime <span class="keyword">timestamp</span> <span class="keyword">not</span> <span class="literal">null</span> <span class="keyword">default</span> <span class="keyword">current_timestamp</span> <span class="keyword">on</span> <span class="keyword">update</span> <span class="keyword">current_timestamp</span>,</span><br><span class="line"></span><br><span class="line">primary <span class="keyword">key</span> (<span class="keyword">id</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>表名称 字段名统一不能是中文，也不能是汉语拼音</p>
+</li>
+<li>
+<p>统一风格，已存在的表是什么风格，就要遵循；如果是新建的表，风格定义要统一标准</p>
+</li>
+<li>
+<p>第一个字段必须 id 是自增长，是主键且无意义</p>
+</li>
+<li>
+<p>一张表只有一个主键，primary key == unique+not null</p>
+</li>
+<li>
+<p>后四个字段</p>
+<p>后四个字段包括：用户、创建时间、修改用户、修改时间</p>
+</li>
+</ul>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">createuser varchar(200) ,</span><br><span class="line">createtime timestamp not null default current_timestamp,</span><br><span class="line">updateuser varchar(200) ,</span><br><span class="line">updatetime timestamp not null default current_timestamp on <span class="keyword">update</span> <span class="keyword">current_timestamp</span>,</span><br></pre></td></tr></table></figure>
+<ul>
+<li>业务字段</li>
+</ul>
+<p>业务字段需要唯一存在，使用 unique 约束，如订单号</p>
+<p>业务字段都必须加上注释</p>
+<ul>
+<li>
+<p>注意字符集</p>
+<p>查看字符集</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> <span class="string">'%char%'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="ddl">DDL</h1>
+<ul>
+<li>
+<p>生产环境下不要用 * 代替所有字段</p>
+</li>
+<li>
+<p>查询语句如果数据量特别大必须使用 where 或者 limit，否则需要使用大量的资源</p>
+</li>
+<li>
+<p><code>新增语句：</code>insert into 表名（字段 1，字段 2…） values（数据 1，数据 2…）;</p>
+<p>注意：在表名后加上对应要添加的字段名</p>
+</li>
+<li>
+<p><code>修改语句：</code>update 表名 set 修改后的字段 where 条件；</p>
+<p>注意：一定要加上条件，否则是全局修改</p>
+</li>
+<li>
+<p><code>删除语句：</code>delete from 表名 where 条件；</p>
+<p>注意：一定要加上条件，否则是全局删除；</p>
+</li>
+</ul>
+<h1 id="其他">其他</h1>
+<h2 id="当某条-sql-验证拖累进程时怎么办">当某条 SQL 验证拖累进程时怎么办？</h2>
+<p>使用 show processlist；查看 mysql 中的 sql 进程</p>
+<p>然后根据 id 删除即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show processlist;</span><br><span class="line">kill id;</span><br></pre></td></tr></table></figure>
+<h2 id="常用命令">常用命令</h2>
+<h3 id="修改密码">修改密码：</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> <span class="keyword">user</span> <span class="keyword">set</span> <span class="keyword">password</span>=<span class="keyword">password</span>(<span class="string">'密码'</span>) <span class="keyword">where</span> <span class="keyword">user</span>=<span class="string">'用户名'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="修改权限">修改权限:</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> 用户名@<span class="string">'%'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'密码'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="刷新权限">刷新权限：</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="datetime-timestamp-区别">datetime timestamp 区别</h3>
+<ul>
+<li>
+<p>两者的存储方式不一样：</p>
+<p><code>对于TIMESTAMP： 它把客户端插入的时间从 当前时区 转化为UTC（世界标准时间）进行存储。 查询时，将其又转化为客户端当前时区进行返回。</code>对于DATETIME： 不做任何改变，基本上是原样输入和输出。</p>
+</li>
+<li>
+<p>两者所能存储的时间范围不一样</p>
+<p>timestamp所能存储的时间范围为：‘1970-01-01 00:00:01.000000’ 到 ‘2038-01-19 03:14:07.999999’。 datetime所能存储的时间范围为：‘1000-01-01 00:00:00.000000’ 到 ‘9999-12-31 23:59:59.999999’。</p>
+</li>
+<li>
+<p>总结：TIMESTAMP 和 DATETIME 除了存储范围和存储方式不一样，没有太大区别。当然，对于跨时区的业务，TIMESTAMP 更为合适。</p>
+</li>
+</ul>
 
                 
 
@@ -263,12 +301,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/article/11-21/" data-toggle="tooltip" data-placement="top" title="mysql部署">&larr; Previous Post</a>
+                            <a href="/article/11-24/" data-toggle="tooltip" data-placement="top" title="sql语句">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/article/11-17/" data-toggle="tooltip" data-placement="top" title="linux常用命令4和vi编辑器">Next Post &rarr;</a>
+                            <a href="/article/11-21/" data-toggle="tooltip" data-placement="top" title="mysql部署">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -318,7 +356,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#linux"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">linux</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#命令"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">&#x547D;&#x4EE4;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#crontabcron-chronos-希腊文时间"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">crontab&#xFF08;cron = Chronos &#x5E0C;&#x814A;&#x6587;&#x65F6;&#x95F4;&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#面试题-每隔10s执行一次"><span class="toc-nav-number">1.1.1.1.</span> <span class="toc-nav-text">&#x9762;&#x8BD5;&#x9898; &#x6BCF;&#x9694;10s&#x6267;&#x884C;&#x4E00;&#x6B21;</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#ln-link"><span class="toc-nav-number">1.1.2.</span> <span class="toc-nav-text">ln&#xFF08; link&#xFF09;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用场景一"><span class="toc-nav-number">1.1.2.1.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;&#x573A;&#x666F;&#x4E00;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#使用场景二"><span class="toc-nav-number">1.1.2.2.</span> <span class="toc-nav-text">&#x4F7F;&#x7528;&#x573A;&#x666F;&#x4E8C;</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#tips"><span class="toc-nav-number">1.1.2.3.</span> <span class="toc-nav-text">tips</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#后台执行脚本的方法"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">&#x540E;&#x53F0;&#x6267;&#x884C;&#x811A;&#x672C;&#x7684;&#x65B9;&#x6CD5;</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#建表规范"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">&#x5EFA;&#x8868;&#x89C4;&#x8303;</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#ddl"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">DDL</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#其他"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">&#x5176;&#x4ED6;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#当某条-sql-验证拖累进程时怎么办"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">&#x5F53;&#x67D0;&#x6761; SQL &#x9A8C;&#x8BC1;&#x62D6;&#x7D2F;&#x8FDB;&#x7A0B;&#x65F6;&#x600E;&#x4E48;&#x529E;&#xFF1F;</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#常用命令"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">&#x5E38;&#x7528;&#x547D;&#x4EE4;</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改密码"><span class="toc-nav-number">3.2.1.</span> <span class="toc-nav-text">&#x4FEE;&#x6539;&#x5BC6;&#x7801;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#修改权限"><span class="toc-nav-number">3.2.2.</span> <span class="toc-nav-text">&#x4FEE;&#x6539;&#x6743;&#x9650;:</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#刷新权限"><span class="toc-nav-number">3.2.3.</span> <span class="toc-nav-text">&#x5237;&#x65B0;&#x6743;&#x9650;&#xFF1A;</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#datetime-timestamp-区别"><span class="toc-nav-number">3.2.4.</span> <span class="toc-nav-text">datetime timestamp &#x533A;&#x522B;</span></a></li></ol></li></ol></li></ol>
         
         </div>
       </aside>
@@ -338,7 +376,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                          <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
                         
                     </div>
                 </section>
