@@ -141,14 +141,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -644,6 +644,39 @@ ll =ls -l 罗列出当前文件或目录的详细信息
 </div>
 <hr>
 
+<div class="post-preview">
+
+    <a href="/article/11-30/">
+        <h2 class="post-title">
+                                 
+            yarn 的伪分布式部署 & jps 的原理 & oom-killer&/tmp 目录的 clean 机制
+        </h2>
+        <h3 class="post-subtitle">
+            hadoop第二期
+        </h3>
+        <div class="post-content-preview">
+            YARN 伪分布式
+修改如下的配置文件
+etc/hadoop/mapred-site.xml:
+1234&lt;property&gt;    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;    &lt;value&gt;yarn&lt;/value&gt;&lt;/property&gt;
+etc/hadoop/yarn-site.xm......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by OrangeLewis on
+            2017-11-30
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#hadoop" title="hadoop">hadoop</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
 
 
 <!-- Pager -->
@@ -689,7 +722,7 @@ ll =ls -l 罗列出当前文件或目录的详细信息
             
         
             
-            <a href="/tags/#hadoop" title="hadoop" rel="1">hadoop</a>
+            <a href="/tags/#hadoop" title="hadoop" rel="2">hadoop</a>
             
         
     </div>
@@ -745,6 +778,10 @@ ll =ls -l 罗列出当前文件或目录的详细信息
     <ul>
       
         <li>
+          <a href="/article/11-30/">yarn 的伪分布式部署 &amp; jps 的原理 &amp; oom-killer&amp;/tmp 目录的 clean 机制</a>
+        </li>
+      
+        <li>
           <a href="/article/11-27/">hdfs 的伪分布式部署 &amp; hadoop 的常用命令</a>
         </li>
       
@@ -758,10 +795,6 @@ ll =ls -l 罗列出当前文件或目录的详细信息
       
         <li>
           <a href="/article/11-21/">mysql部署</a>
-        </li>
-      
-        <li>
-          <a href="/article/11-20/">linux常用命令5</a>
         </li>
       
     </ul>

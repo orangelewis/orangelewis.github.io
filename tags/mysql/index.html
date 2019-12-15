@@ -141,14 +141,14 @@
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
@@ -223,6 +223,21 @@
                     <span class="tag-text">2017</span>
                 </span>
                 <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li >
+                    11-30
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/article/11-30/" style="color: #0085a1">
+                        <span>
+                            yarn 的伪分布式部署 & jps 的原理 & oom-killer&/tmp 目录的 clean 机制
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
                 
                   <!-- <li class="listing-item">
                   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
@@ -422,7 +437,7 @@
             
         
             
-            <a href="/tags/#hadoop" title="hadoop" rel="1">hadoop</a>
+            <a href="/tags/#hadoop" title="hadoop" rel="2">hadoop</a>
             
         
     </div>
@@ -478,6 +493,10 @@
     <ul>
       
         <li>
+          <a href="/article/11-30/">yarn 的伪分布式部署 &amp; jps 的原理 &amp; oom-killer&amp;/tmp 目录的 clean 机制</a>
+        </li>
+      
+        <li>
           <a href="/article/11-27/">hdfs 的伪分布式部署 &amp; hadoop 的常用命令</a>
         </li>
       
@@ -491,10 +510,6 @@
       
         <li>
           <a href="/article/11-21/">mysql部署</a>
-        </li>
-      
-        <li>
-          <a href="/article/11-20/">linux常用命令5</a>
         </li>
       
     </ul>
